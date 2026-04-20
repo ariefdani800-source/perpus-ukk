@@ -10,8 +10,17 @@
         </div>
 
         <div class="user-info text-center">
-            <div class="avatar mb-2">
-                <i class="bi bi-person-circle" style="font-size: 3rem; color: #94a3b8;"></i>
+            <div class="avatar mb-2 d-flex justify-content-center">
+                <?php
+                $foto = $this->session->userdata('foto');
+                if (!empty($foto) && $foto !== 'default.png') {
+                    $img_url = base_url('assets/upload/user/' . $foto);
+                } else {
+                    $username = $this->session->userdata('username') ?? 'User';
+                    $img_url = 'https://ui-avatars.com/api/?name=' . urlencode($username) . '&background=random&color=fff&bold=true';
+                }
+                ?>
+                <img src="<?= $img_url ?>" alt="User Photo" style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%; border: 2px solid #94a3b8;">
             </div>
             <h6 class="text-white mb-1"><?= $this->session->userdata('username') ?></h6>
             <span class="badge bg-success">Siswa</span>

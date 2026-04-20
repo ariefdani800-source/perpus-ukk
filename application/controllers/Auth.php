@@ -42,10 +42,11 @@ class Auth extends CI_Controller
             if ($user && $password == $user['password']) {
 
                 $session_data = [
-                    'user_id'    => $user['id'],
+                    'user_id'    => $user['id_user'] ?? $user['id'], // handle generic users table
                     'username'   => $user['username'],
                     'role'       => $user['role'],
                     'id_anggota' => $user['id_anggota'],
+                    'foto'       => $user['foto'] ?? 'default.png',
                     'logged_in'  => TRUE
                 ];
 

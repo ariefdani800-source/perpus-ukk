@@ -92,13 +92,28 @@
             </div>
         </div>
 
-        <?php if ($transaksi['denda'] > 0): ?>
-            <hr>
-            <div class="text-center">
-                <h6 class="text-danger">Denda Keterlambatan</h6>
-                <h3 class="text-danger">Rp <?= number_format($transaksi['denda'], 0, ',', '.') ?></h3>
-            </div>
-        <?php endif; ?>
+        <?php 
+        $denda_tampil = $transaksi['denda'];
+        $is_estimasi = false;
+        
+        if ($transaksi['status'] == 'dipinjam') {
+            $today = date('Y-m-d');
+            if (strtotime($today) > strtotime($transaksi['tanggal_kembali'])) {
+                $diff = (strtotime($today) - strtotime($transaksi['tanggal_kembali'])) / (60 * 60 * 24);
+                $denda_tampil = floor($diff) * TARIF_DENDA;
+                $is_estimasi = true;
+            }
+        }
+        ?>
+
+        <hr>
+        <div class="text-center">
+            <h6 class="<?= $denda_tampil > 0 ? 'text-danger' : 'text-muted' ?>">Denda Keterlambatan</h6>
+            <h3 class="<?= $denda_tampil > 0 ? 'text-danger' : 'text-success' ?>">Rp <?= number_format($denda_tampil, 0, ',', '.') ?></h3>
+            <?php if ($is_estimasi): ?>
+                <small class="text-danger">(Estimasi Berjalan)</small>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 

@@ -11,14 +11,10 @@
 <div class="card">
     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom-0">
         <h5 class="mb-0 fw-bold">Daftar Buku</h5>
-        <div class="input-group" style="width: 300px;">
-            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-            <input type="text" id="searchInput" class="form-control border-start-0 ps-0" placeholder="Cari data buku...">
-        </div>
     </div>
     <div class="card-body border-top">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover datatable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -66,23 +62,3 @@
         </div>
     </div>
 </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    if(searchInput) {
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase();
-            const rows = document.querySelectorAll('table tbody tr');
-            
-            rows.forEach(row => {
-                if(row.cells.length > 1) { 
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(filter) ? '' : 'none';
-                }
-            });
-        });
-    }
-});
-</script>

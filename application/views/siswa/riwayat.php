@@ -15,8 +15,8 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <table class="table table-bordered table-hover">
-                <thead class="table-primary">
+            <table class="table table-hover align-middle datatable">
+                <thead style="background: linear-gradient(90deg, #1e293b, #334155); color: white;">
                     <tr>
                         <th>No</th>
                         <th>Judul Buku</th>

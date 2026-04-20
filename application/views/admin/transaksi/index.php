@@ -1,12 +1,8 @@
 <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
     <h5 class="mb-0 fw-bold">Data Transaksi</h5>
-    <div class="input-group shadow-sm" style="width: 300px;">
-        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
-        <input type="text" id="searchInput" class="form-control border-start-0 ps-0" placeholder="Cari data transaksi...">
-    </div>
 </div>
 
-<table class="table table-hover">
+<table class="table table-hover datatable">
     <thead>
         <tr>
             <th>No</th>
@@ -90,22 +86,3 @@
         <?php endif; ?>
     </tbody>
 </table>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    if(searchInput) {
-        searchInput.addEventListener('keyup', function() {
-            const filter = searchInput.value.toLowerCase();
-            const rows = document.querySelectorAll('table tbody tr');
-            
-            rows.forEach(row => {
-                if(row.cells.length > 1) { 
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(filter) ? '' : 'none';
-                }
-            });
-        });
-    }
-});
-</script>

@@ -127,7 +127,7 @@ body {
 
 <div class="card-register">
     <div class="logo">
-        <i class="bi bi-person-plus-fill"></i>
+        <img src="<?= base_url('assets/img/logo_mbg.png') ?>" alt="Logo Perpustakaan MBG" style="width: 120px; height: auto; border-radius: 24px; margin-bottom: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
         <h3>Create Account</h3>
     </div>
 

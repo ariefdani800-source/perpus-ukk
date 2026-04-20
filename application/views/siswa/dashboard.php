@@ -16,8 +16,17 @@
         <div class="card h-100 text-white border-0"
             style="background: linear-gradient(135deg, var(--primary-color), var(--primary-hover)); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);">
             <div class="card-body text-center py-5 d-flex flex-column justify-content-center align-items-center">
-                <div class="bg-white bg-opacity-25 rounded-circle p-3 mb-3">
-                    <i class="bi bi-person-circle" style="font-size: 48px;"></i>
+                <div class="bg-white bg-opacity-25 rounded-circle p-2 mb-3" style="width: 90px; height: 90px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <?php
+                    $foto = $this->session->userdata('foto');
+                    if (!empty($foto) && $foto !== 'default.png') {
+                        $img_url = base_url('assets/upload/user/' . $foto);
+                    } else {
+                        $username = $this->session->userdata('username') ?? $anggota['nama'];
+                        $img_url = 'https://ui-avatars.com/api/?name=' . urlencode($username) . '&background=random&color=fff&bold=true';
+                    }
+                    ?>
+                    <img src="<?= $img_url ?>" alt="User Photo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                 </div>
                 <h4 class="mb-1 fw-bold"><?= htmlspecialchars($anggota['nama']) ?></h4>
                 <div class="d-flex gap-2 justify-content-center mt-2">
@@ -25,6 +34,9 @@
                         class="badge bg-white bg-opacity-25 border border-white border-opacity-25"><?= htmlspecialchars($anggota['nis']) ?></span>
                 </div>
                 <p class="mt-3 mb-0 opacity-75">Kelas: <?= htmlspecialchars($anggota['kelas']) ?></p>
+                <a href="<?= base_url('siswa/cetak_kartu') ?>" target="_blank" class="btn btn-sm btn-light text-primary mt-3 px-4 rounded-pill fw-bold shadow-sm">
+                    <i class="bi bi-person-badge me-2"></i>Cetak Kartu Anda
+                </a>
             </div>
         </div>
     </div>
@@ -51,7 +63,7 @@
                 </div>
                 <div>
                     <div class="value"><?= $pinjaman_aktif ?></div>
-                    <div class="label">Active Loans</div>
+                    <div class="label">Total Loan</div>
                 </div>
             </div>
         </div>
@@ -104,8 +116,8 @@
             </div>
         <?php else: ?>
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
+                <table class="table table-hover align-middle datatable">
+                    <thead style="background: linear-gradient(90deg, #1e293b, #334155); color: white;">
                         <tr>
                             <th class="ps-3">Tanggal Pinjam</th>
                             <th>Batas Kembali</th>
